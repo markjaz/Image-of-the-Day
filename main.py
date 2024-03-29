@@ -29,6 +29,8 @@ json_content = response.json()
 # The returned JSON data is a list whose first item is a dict with all of the
 # info about the image.  The 'hdurl' key contains the value of the URL of
 # the high-resolution image.
+# Other data i the JSON file includes: date, explanation, media_type,
+# service_version. title, url.
 image_url = json_content[0]['hdurl']
 # Retrieve the image based on the URL contained in the JSON data.
 image_data = requests.get(image_url)
