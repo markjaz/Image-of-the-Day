@@ -5,7 +5,6 @@ import requests
 import datetime
 import streamlit as st
 
-
 st.set_page_config(layout="wide")
 
 # NASA API info:
@@ -26,7 +25,7 @@ json_content = response.json()
 # The returned JSON data is a list whose first item is a dict with all of the
 # info about the image.  The 'hdurl' key contains the value of the URL of
 # the high-resolution image.
-# Other data i the JSON file includes: date, explanation, media_type,
+# Other data in the JSON file includes: date, explanation, media_type,
 # service_version. title, url.
 image_url = json_content[0]['hdurl']
 # Retrieve the image based on the URL contained in the JSON data.
@@ -34,7 +33,7 @@ image_data = requests.get(image_url)
 # Write the image data to a local file:
 with open(file_name, "wb") as image_file:
     image_file.write(image_data.content)
-
+# Place the image and explanatory caption on a streamlit Web page.
 st.title("Astronomy Image of the Day")
 st.subheader("from nasa.gov")
 st.image(file_name, use_column_width=True)
