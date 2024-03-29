@@ -3,19 +3,16 @@ Retrieve an image from the Web each day and save to local file system.
 """
 import requests
 import datetime
+import streamlit as st
+
+
+st.set_page_config(layout="wide")
 
 # NASA API info:
 nasa_api_mail= "mark@portalfour.com"
 nasa_api_account_id = "3852de5e-0b33-453a-8c68-dc0d84ed051f"
 nasa_api_key = "20VYdG9L5j55ccblqeXvzAblxcz2wOYcqVLbNMnI"
 
-# Retrieve the specified image (Christina Carter - for testing only):
-"""
-image_url = "https://i91.fastpic.ru/big/2017/0416/40/0f9641ae700accebfefee37a7be15140.jpg"
-response = requests.get(image_url)
-with open("image.jpg", "wb") as image_file:
-    image_file.write(response.content)
- """
 todays_date = datetime.date.today()
 
 # Get the NASA "Astronomy Photo of the Day (APOD"):
@@ -37,3 +34,8 @@ image_data = requests.get(image_url)
 # Write the image data to a local file:
 with open(file_name, "wb") as image_file:
     image_file.write(image_data.content)
+
+st.title("Astronomy Image of the Day")
+st.subheader("from nasa.gov")
+st.image(file_name, use_column_width=True)
+st.write(json_content[0]['explanation'])
